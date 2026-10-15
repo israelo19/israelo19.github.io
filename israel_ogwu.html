@@ -1,0 +1,641 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Israel Ogwu</title>
+  <meta name="description"
+    content="Israel Ogwu works at the intersection of AI and computer security. Senior at the University of Maryland, building in AI security and researching MCP exploitability.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,700;1,400&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --paper: #FDFDFC;
+      --ink: #1B1B1A;
+      --muted: #767470;
+      --rule: #E8E7E3;
+      --link: #1F6F52;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      -webkit-text-size-adjust: 100%;
+      scroll-behavior: smooth;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+    }
+
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 14.5px;
+      line-height: 1.7;
+      font-feature-settings: "kern", "liga", "calt";
+    }
+
+    #field {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    a {
+      color: var(--link);
+      text-decoration: underline;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 3px;
+      text-decoration-color: rgba(31, 111, 82, .45);
+    }
+
+    a:hover {
+      text-decoration-color: var(--link);
+    }
+
+    a:focus-visible {
+      outline: 2px solid var(--link);
+      outline-offset: 3px;
+    }
+
+    .page {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 40px 96px;
+      max-width: 1320px;
+      margin: 0 auto;
+      padding: 36px 20px 80px;
+    }
+
+    @media (min-width: 900px) {
+      .page {
+        grid-template-columns: 280px minmax(0, 1fr);
+        padding: 72px 56px 120px;
+      }
+    }
+
+    @media (min-width: 1200px) {
+      .page {
+        grid-template-columns: 300px minmax(0, 1fr);
+        padding: 88px 72px 140px;
+      }
+    }
+
+    aside {
+      align-self: start;
+    }
+
+    @media (min-width: 900px) {
+      aside {
+        position: sticky;
+        top: 72px;
+      }
+    }
+
+    .name {
+      font-weight: 700;
+      font-size: 20px;
+      margin: 0 0 6px;
+      letter-spacing: 0;
+    }
+
+    .tag {
+      color: var(--muted);
+      margin: 0 0 32px;
+    }
+
+    nav ul {
+      list-style: none;
+      margin: 0 0 32px;
+      padding: 0;
+    }
+
+    nav li {
+      margin: 0 0 6px;
+    }
+
+    nav a {
+      color: var(--muted);
+      text-decoration: none;
+    }
+
+    nav a:hover {
+      color: var(--ink);
+    }
+
+    nav a.active {
+      color: var(--ink);
+      font-weight: 500;
+    }
+
+    nav a.active::before {
+      content: "> ";
+      color: var(--ink);
+    }
+
+    nav a:not(.active)::before {
+      content: "  ";
+      white-space: pre;
+    }
+
+    .ids {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .ids li {
+      margin: 0 0 6px;
+    }
+
+    @media (max-width: 899px) {
+      nav ul {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 4px 20px;
+        margin-bottom: 24px;
+      }
+
+      nav a::before,
+      nav a.active::before {
+        content: "" !important;
+      }
+
+      nav a.active {
+        border-bottom: 1.5px solid var(--ink);
+      }
+
+      .ids {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 4px 20px;
+      }
+
+      aside {
+        padding-bottom: 28px;
+        border-bottom: 1px solid var(--rule);
+      }
+
+      #field {
+        opacity: 0.6;
+      }
+    }
+
+    main {
+      max-width: 760px;
+    }
+
+    main>section:first-child {
+      padding-top: 0;
+    }
+
+    section {
+      padding-top: 0;
+      margin-top: 64px;
+    }
+
+    section:first-child {
+      margin-top: 0;
+    }
+
+    h2 {
+      font-size: 14.5px;
+      font-weight: 700;
+      margin: 0 0 20px;
+      letter-spacing: 0.01em;
+    }
+
+    h2::after {
+      content: "";
+      display: block;
+      width: 40px;
+      height: 1px;
+      background: var(--ink);
+      margin-top: 10px;
+    }
+
+    .intro p {
+      font-size: 16px;
+      line-height: 1.7;
+      margin: 0 0 14px;
+      max-width: 62ch;
+    }
+
+    .intro p:last-child {
+      margin-bottom: 0;
+    }
+
+    .intro a {
+      color: var(--link);
+    }
+
+    .list {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 26px;
+    }
+
+    .item {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2px 28px;
+    }
+
+    @media (min-width: 640px) {
+      .item {
+        grid-template-columns: 112px minmax(0, 1fr);
+      }
+    }
+
+    .when {
+      color: var(--muted);
+      line-height: 1.5;
+      padding-top: 2px;
+    }
+
+    .what h3 {
+      font-size: 14.5px;
+      font-weight: 700;
+      margin: 0 0 2px;
+    }
+
+    .what h3 a {
+      color: var(--ink);
+      text-decoration: none;
+    }
+
+    .what h3 a:hover {
+      text-decoration: underline;
+      text-decoration-color: var(--ink);
+    }
+
+    .what p {
+      margin: 0 0 8px;
+      max-width: 70ch;
+    }
+
+    .what p:last-child {
+      margin-bottom: 0;
+    }
+
+    .what .links {
+      color: var(--muted);
+    }
+
+    .what .links a {
+      color: var(--muted);
+      text-decoration-color: rgba(118, 116, 112, .5);
+    }
+
+    .what .links a:hover {
+      color: var(--ink);
+      text-decoration-color: var(--ink);
+    }
+
+    .more {
+      margin-top: 26px;
+    }
+
+    .aside-note {
+      margin-top: 64px;
+      color: var(--muted);
+      max-width: 62ch;
+    }
+
+    footer {
+      margin-top: 72px;
+      padding-top: 18px;
+      border-top: 1px solid var(--rule);
+      color: var(--muted);
+      font-size: 13px;
+    }
+  </style>
+</head>
+
+<body>
+  <canvas id="field" aria-hidden="true"></canvas>
+
+  <div class="page">
+    <aside>
+      <p class="name">Israel Ogwu</p>
+      <p class="tag">AI security and AI safety.</p>
+
+      <nav aria-label="Sections">
+        <ul>
+          <li><a href="#about">About</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#experience">Experience</a></li>
+          <li><a href="#research">Research</a></li>
+          <li><a href="#community">Community</a></li>
+        </ul>
+      </nav>
+
+      <ul class="ids">
+        <li><a href="https://github.com/israelo19">github.com/israelo19</a></li>
+        <li><a href="https://www.linkedin.com/in/israelogwu">linkedin</a></li>
+        <li><a href="mailto:israel.ogwu.2023@gmail.com">israel.ogwu.2023@gmail.com</a></li>
+        <li><a href="resume.pdf">resume</a></li>
+      </ul>
+    </aside>
+
+    <main>
+      <section id="about" class="intro">
+        <p>I work at the intersection of AI security and AI safety.</p>
+        <p>Most of my time goes to one question: what happens when an AI gets tools and credentials, and how do you
+          limit the damage when it goes wrong.</p>
+        <p>I'm a senior at the University of Maryland.</p>
+        <p>I'm currently building Warden and doing research in <a href="https://www.cs.umd.edu/~tomg/">Tom
+            Goldstein</a>'s lab on MCP exploitability and MCP viruses.</p>
+        <p>I like ambitious problems.</p>
+        <p>After all, there has never been a better time to have a problem.</p>
+        <p>I'm an <a href="https://claude.com/programs/campus">Anthropic Campus Ambassador</a>.</p>
+      </section>
+
+      <section id="projects">
+        <h2>Projects</h2>
+        <div class="list">
+
+          <div class="item">
+            <div class="when">2026</div>
+            <div class="what">
+              <h3><a href="https://github.com/israelo19/promptguard">PromptGuard</a></h3>
+              <p>An open-source prompt injection benchmark: 148 attack techniques across 23 categories, run against 16
+                defenses. The question was which defenses hold against which classes of injection, and where they fail
+                together.</p>
+              <p class="links"><a href="https://github.com/israelo19/promptguard">code</a></p>
+            </div>
+          </div>
+
+          <div class="item">
+            <div class="when">2026, ongoing</div>
+            <div class="what">
+              <h3><a href="https://github.com/israelo19/warden">Warden</a></h3>
+              <p>A runtime policy layer for sandboxed AI agents. It mediates every outbound network request, validates
+                the artifacts an agent writes before anything downstream runs them, and gives the agent a short-lived,
+                narrowly scoped identity. Built on gVisor and Firecracker, with Terraform for the infrastructure around
+                it.</p>
+              <p>So far: across 25 trials per condition, egress mediation cut the unauthorized-egress rate by 74% versus
+                gVisor's default isolation alone. Next is an adversarial control evaluation against an agent that is
+                explicitly trying to get out.</p>
+              <p class="links"><a href="https://github.com/israelo19/warden">code</a></p>
+            </div>
+          </div>
+
+          <div class="item">
+            <div class="when">Spring 2026</div>
+            <div class="what">
+              <h3><a href="https://github.com/HackedRico/obv-nara-box">NARA</a></h3>
+              <p>An autonomous red team platform built with teammates at BitCamp 2026. A Scanner maps a target's
+                surface, a Planner turns findings into an attack plan, and an Exploiter carries it out. Won the
+                Neelbauer Agent Revolution Award and Best Champion of Open Source.</p>
+              <p class="links"><a href="https://github.com/HackedRico/obv-nara-box">code</a></p>
+            </div>
+          </div>
+
+          <div class="item">
+            <div class="when">Sept 2026</div>
+            <div class="what">
+              <h3>Mayday</h3>
+              <p>An AI emergency dispatcher built with a team of four at HopHacks 2026. It watches a bystander through
+                their phone camera and coaches them through CPR or severe-bleeding first aid, out loud, until EMS
+                arrives. React, MediaPipe, ElevenLabs, Gemini.</p>
+            </div>
+          </div>
+
+        </div>
+        <p class="more">More on <a href="https://github.com/israelo19">GitHub</a>.</p>
+      </section>
+
+      <section id="experience">
+        <h2>Experience</h2>
+        <div class="list">
+
+          <div class="item">
+            <div class="when">Summer 2026</div>
+            <div class="what">
+              <h3>Microsoft, Software Engineering Intern</h3>
+              <p>IAM Protect. Built the MAP Portal and drove least-privilege access across 31 Azure subscriptions.</p>
+              <p>On the side, a security review of Clarity Agent for the AEGIS AI safety team: seven findings,
+                coordinated disclosure, one fix merged upstream. <a
+                  href="https://github.com/microsoft/clarity-agent/pull/149">PR #149</a></p>
+            </div>
+          </div>
+
+          <div class="item">
+            <div class="when">Summer 2024</div>
+            <div class="what">
+              <h3>Cisco, Consulting Engineering Intern</h3>
+              <p>Security infrastructure automation and AI network agents.</p>
+            </div>
+          </div>
+
+          <div class="item">
+            <div class="when">Sept 2024<br>to Sept 2026</div>
+            <div class="what">
+              <h3>S.S. Papadopoulos &amp; Associates, Co-op</h3>
+              <p>Built a retrieval-augmented generation pipeline on PostgreSQL with pgvector and on-premises language
+                models.</p>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <section id="research">
+        <h2>Research</h2>
+        <div class="list">
+          <div class="item">
+            <div class="when">2026, ongoing</div>
+            <div class="what">
+              <h3>MCP exploitability</h3>
+              <p>With <a href="https://www.cs.umd.edu/~tomg/">Tom Goldstein</a>'s group at the University of Maryland's
+                Machine Learning Center. What an attacker-controlled tool server can induce a model to do, and which
+                signals of that survive across models.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="community">
+        <h2>Community</h2>
+        <div class="list">
+          <div class="item">
+            <div class="when"></div>
+            <div class="what">
+              <h3><a href="https://claude.com/programs/campus">Anthropic Campus Ambassador</a></h3>
+            </div>
+          </div>
+          <div class="item">
+            <div class="when"></div>
+            <div class="what">
+              <h3>President, Claude Builder Club at Maryland</h3>
+              <p>Founded it. The largest AI building community at Maryland, 700+ members. We teach students to build
+                with AI. Ran a 400-person spring hackathon.</p>
+            </div>
+          </div>
+          <div class="item">
+            <div class="when"></div>
+            <div class="what">
+              <h3>UMD Computer Science Department Council</h3>
+            </div>
+          </div>
+          <div class="item">
+            <div class="when"></div>
+            <div class="what">
+              <h3>Startup Shell</h3>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <p class="aside-note">Outside of this I play guitar, write songs, and read philosophy.</p>
+
+      <footer>Israel Ogwu, College Park, Maryland.</footer>
+    </main>
+  </div>
+
+  <script>
+    (function () {
+      var canvas = document.getElementById('field');
+      if (!canvas || !canvas.getContext) return;
+      var ctx = canvas.getContext('2d');
+      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var fine = window.matchMedia('(pointer: fine)').matches;
+
+      var CW = 16, CH = 18;
+      var INK = '27,27,26';
+      var BASE_A = 0.014, PEAK_A = 0.10, R = 140;
+      var FONT = '11px "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace';
+
+      var cols, rows, bits, ex, base, bctx, w, h, dpr, active = false;
+
+      function size() {
+        dpr = Math.min(window.devicePixelRatio || 1, 2);
+        w = window.innerWidth; h = window.innerHeight;
+        canvas.width = Math.round(w * dpr); canvas.height = Math.round(h * dpr);
+        canvas.style.width = w + 'px'; canvas.style.height = h + 'px';
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+        cols = Math.ceil(w / CW) + 1; rows = Math.ceil(h / CH) + 1;
+        var n = cols * rows;
+        bits = new Uint8Array(n);
+        for (var i = 0; i < n; i++) bits[i] = Math.random() < 0.5 ? 1 : 0;
+        ex = new Float32Array(n);
+
+        base = document.createElement('canvas');
+        base.width = canvas.width; base.height = canvas.height;
+        bctx = base.getContext('2d');
+        bctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        bctx.font = FONT; bctx.textBaseline = 'top';
+        bctx.fillStyle = 'rgba(' + INK + ',' + BASE_A + ')';
+        for (var r = 0; r < rows; r++) {
+          for (var c = 0; c < cols; c++) bctx.fillText(bits[r * cols + c], c * CW + 3, r * CH + 3);
+        }
+        ctx.clearRect(0, 0, w, h);
+        ctx.drawImage(base, 0, 0, w, h);
+      }
+
+      function excite(mx, my) {
+        var c0 = Math.max(0, Math.floor((mx - R) / CW)), c1 = Math.min(cols - 1, Math.ceil((mx + R) / CW));
+        var r0 = Math.max(0, Math.floor((my - R) / CH)), r1 = Math.min(rows - 1, Math.ceil((my + R) / CH));
+        for (var r = r0; r <= r1; r++) {
+          for (var c = c0; c <= c1; c++) {
+            var dx = c * CW + CW / 2 - mx, dy = r * CH + CH / 2 - my;
+            var d = Math.sqrt(dx * dx + dy * dy);
+            if (d < R) {
+              var i = r * cols + c, v = 1 - d / R;
+              if (v > ex[i]) {
+                if (ex[i] < 0.05 && Math.random() < 0.6) bits[i] ^= 1;
+                ex[i] = v;
+              }
+            }
+          }
+        }
+        if (!active) { active = true; window.requestAnimationFrame(frame); }
+      }
+
+      function frame() {
+        ctx.clearRect(0, 0, w, h);
+        ctx.drawImage(base, 0, 0, w, h);
+        ctx.font = FONT; ctx.textBaseline = 'top';
+        var any = false;
+        for (var i = 0; i < ex.length; i++) {
+          var e = ex[i];
+          if (e <= 0) continue;
+          var c = i % cols, r = (i - c) / cols, x = c * CW, y = r * CH;
+          ctx.clearRect(x, y, CW, CH);
+          ctx.fillStyle = 'rgba(' + INK + ',' + (BASE_A + (PEAK_A - BASE_A) * e) + ')';
+          ctx.fillText(bits[i], x + 3, y + 3);
+          var ne = e - 0.018;
+          if (ne <= 0) {
+            ex[i] = 0;
+            bctx.clearRect(x, y, CW, CH);
+            bctx.font = FONT; bctx.textBaseline = 'top';
+            bctx.fillStyle = 'rgba(' + INK + ',' + BASE_A + ')';
+            bctx.fillText(bits[i], x + 3, y + 3);
+          } else { ex[i] = ne; any = true; }
+        }
+        if (any) window.requestAnimationFrame(frame); else active = false;
+      }
+
+      if (document.fonts && document.fonts.load) {
+        document.fonts.load('11px "JetBrains Mono"').then(size, size);
+      } else { size(); }
+      var t;
+      window.addEventListener('resize', function () { clearTimeout(t); t = setTimeout(size, 150); });
+      if (fine && !reduce) {
+        window.addEventListener('pointermove', function (e) { excite(e.clientX, e.clientY); }, { passive: true });
+      }
+    })();
+
+    (function () {
+      var links = Array.prototype.slice.call(document.querySelectorAll('nav a'));
+      var sections = links.map(function (a) { return document.querySelector(a.getAttribute('href')); }).filter(Boolean);
+      if (!sections.length) return;
+      var current = null, ticking = false;
+
+      function paint() {
+        links.forEach(function (a) { a.classList.toggle('active', a.getAttribute('href') === '#' + current); });
+      }
+
+      function update() {
+        ticking = false;
+        var doc = document.documentElement;
+        var atBottom = window.innerHeight + window.scrollY >= doc.scrollHeight - 2;
+        var line = window.innerHeight * 0.3;
+        var id = sections[0].id;
+        if (atBottom) {
+          id = sections[sections.length - 1].id;
+        } else {
+          for (var i = 0; i < sections.length; i++) {
+            if (sections[i].getBoundingClientRect().top <= line) id = sections[i].id;
+          }
+        }
+        if (id !== current) { current = id; paint(); }
+      }
+
+      function onScroll() {
+        if (!ticking) { ticking = true; window.requestAnimationFrame(update); }
+      }
+
+      window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('resize', onScroll);
+      update();
+    })();  </script>
+</body>
+
+</html>
